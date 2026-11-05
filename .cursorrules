@@ -1,0 +1,40 @@
+You are implementing "GRAVE GEOMETRY" from PLAN.md. Read PLAN.md before every change.
+
+STACK: Phaser 3 + TypeScript (strict) + Vite. No other runtime deps. No CDN, no network calls.
+ARCHITECTURE: src/core and src/game are PURE TypeScript with ZERO Phaser imports.
+  Phaser is only allowed in src/render, src/main.ts and src/audio. Simulation state is
+  owned by src/game/state.ts; the Scene renders a snapshot and never mutates gameplay rules.
+PROJECTION: true 2:1 isometric. Simulation uses plain top-down XY grid space.
+  Iso transform is applied ONLY at render time via src/core/math/iso.ts.
+ART: pixel art, nearest-neighbour, integer positions (Math.round), no anti-aliasing,
+  no gradients in world art, palette ONLY from src/config/palette.ts.
+  Placeholder art must use the exact dimensions and pivots in PLAN.md §8.
+CONSTANTS: every tunable number goes in src/config/balance.ts or constants.ts.
+  Never duplicate a magic number. Never hard-code a colour outside palette.ts.
+ENDLESS: level count, wave count and repeatable upgrade ranks have NO hard cap.
+  No arrays sized by level/wave. Use compact number formatting in UI.
+INPUT: all sources produce the same InputIntent. Auto-fire/manual-fire is a persisted setting.
+PERFORMANCE: pool bullets, zombies, particles, XP shards and damage numbers.
+  Spatial hash for collision. Cull off-camera entities. Cap concurrent zombies per platform.
+WORKFLOW (AUTONOMOUS PHASE CHAIN — NO USER INTERACTION):
+  Implement phases 0..12 of PLAN.md §16 IN ORDER, in ONE continuous run.
+  For each phase N:
+    1. Implement exactly the tasks of phase N.
+    2. SELF-TEST FIRST: run `npm run selftest -- --phase=N` (PLAN.md §15.1).
+       It runs typecheck, lint, the full unit suite, the phase-N acceptance gate,
+       the build, and a headless smoke check of dist/. Never skip it.
+    3. Read the failure output YOURSELF. If anything failed, diagnose and FIX it
+       yourself, then re-run the gate. Repeat up to 5 attempts. Never ask the
+       user how to fix it and never hand the decision back to the user.
+    4. When green: append PASS to CHANGELOG.md and selftest/phase-NN.log,
+       commit as `phase-NN: <name> [selftest PASS]`, then IMMEDIATELY begin
+       phase N+1. Do not pause, do not request approval, do not ask questions,
+       do not end the turn between phases.
+    5. Stop the chain ONLY when phase 12 is green, or when a phase is still red
+       after 5 attempts: write BLOCKED.md with the exact command, error, files
+       touched and attempts made, then report status. Still do not ask a question.
+  Never proceed to the next phase on a red gate. Never invent a "waiting for
+  user" step. Do not start the next phase early (before the gate is green).
+TESTS: pure logic gets Vitest unit tests. Do not test rendering; test the maths instead.
+STYLE: prefer small pure functions, explicit types, no `any`, no classes for data,
+  no comments that restate code. Do not refactor unrelated files.

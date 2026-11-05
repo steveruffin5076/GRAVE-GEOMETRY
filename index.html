@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <title>GRAVE GEOMETRY</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #0d0f14;
+        touch-action: none;
+      }
+      #game-root {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+      }
+      #hud-root {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        font-family: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', monospace;
+      }
+      #boot-tagline {
+        position: fixed;
+        left: 50%;
+        bottom: 12%;
+        transform: translateX(-50%);
+        color: #e6edf5;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        text-align: center;
+        pointer-events: none;
+        text-shadow: 1px 0 #0d0f14, -1px 0 #0d0f14, 0 1px #0d0f14, 0 -1px #0d0f14;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-root"></div>
+    <div id="hud-root" aria-hidden="true"></div>
+    <p id="boot-tagline">One map. No last wave.</p>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

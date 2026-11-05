@@ -1,0 +1,386 @@
+.gg-hud {
+  color: #e6edf5;
+  font-size: clamp(12px, 2.4vw, 14px);
+  text-shadow: 1px 0 #0d0f14, -1px 0 #0d0f14, 0 1px #0d0f14, 0 -1px #0d0f14;
+  pointer-events: none;
+}
+
+.gg-hud-grid {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.gg-hud-block {
+  pointer-events: none;
+  min-width: 0;
+}
+
+.gg-hud-topleft {
+  justify-self: start;
+}
+
+.gg-hud-topcenter {
+  justify-self: center;
+  text-align: center;
+}
+
+.gg-hud-topright {
+  justify-self: end;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.gg-bar {
+  width: min(140px, 28vw);
+  height: 8px;
+  background: #1e2635;
+  border: 2px solid #0d0f14;
+}
+
+.gg-bar-fill {
+  height: 100%;
+  background: #8467c9;
+  width: 0;
+}
+
+.gg-hud-hp-text,
+.gg-hud-xp-text {
+  font-size: clamp(11px, 2.2vw, 12px);
+  color: #c9aef5;
+}
+
+.gg-hud-dash,
+.gg-hud-kills,
+.gg-hud-score,
+.gg-hud-wave,
+.gg-hud-level {
+  font-size: clamp(11px, 2.2vw, 12px);
+}
+
+.gg-hud-weapon {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgb(18 23 34 / 88%);
+  border: 2px solid #0d0f14;
+  padding: 6px 10px;
+  min-width: 160px;
+}
+
+.gg-hud-weapon-name {
+  font-size: clamp(12px, 2.6vw, 14px);
+  color: #d8b34a;
+}
+
+.gg-hud-ammo {
+  font-size: clamp(11px, 2.2vw, 12px);
+}
+
+.gg-reload-ring {
+  height: 4px;
+  margin-top: 4px;
+  background: #1e2635;
+  opacity: 0;
+}
+
+.gg-reload-ring::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: var(--reload-pct, 0%);
+  background: #55705a;
+}
+
+.gg-hud-status {
+  position: fixed;
+  bottom: 64px;
+  left: 8px;
+  right: 8px;
+  text-align: center;
+  font-size: clamp(11px, 2.2vw, 12px);
+  opacity: 0.85;
+}
+
+.gg-sr-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.gg-hud-top {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.gg-hud-meta {
+  font-size: 11px;
+  color: #c9aef5;
+}
+
+.gg-fire-chip {
+  pointer-events: auto;
+  cursor: pointer;
+  background: #1e2635;
+  color: #e6edf5;
+  border: 2px solid #0d0f14;
+  padding: 8px 10px;
+  min-height: 48px;
+  min-width: 48px;
+  font: inherit;
+  font-size: clamp(11px, 2.2vw, 12px);
+}
+
+.gg-hud-topright .gg-fire-chip {
+  margin-left: 0;
+}
+
+.gg-pause-banner {
+  display: none;
+}
+
+.gg-pause-overlay,
+.gg-gameover-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(13 15 20 / 82%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 70;
+  pointer-events: auto;
+}
+
+.gg-upgrade-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(13 15 20 / 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.gg-upgrade-overlay[hidden],
+.gg-settings-overlay[hidden],
+.gg-pause-overlay[hidden],
+.gg-gameover-overlay[hidden] {
+  display: none !important;
+}
+
+.gg-pause-dialog,
+.gg-gameover-dialog {
+  background: #121722;
+  border: 2px solid #8467c9;
+  padding: 16px;
+  width: min(420px, 92vw);
+  max-height: 90vh;
+  overflow: auto;
+  color: #e6edf5;
+}
+
+.gg-overlay-title {
+  margin: 0 0 12px;
+  font-size: clamp(14px, 3vw, 18px);
+  text-align: center;
+}
+
+.gg-overlay-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gg-overlay-btn {
+  min-height: 48px;
+  padding: 10px 12px;
+  background: #1e2635;
+  color: #e6edf5;
+  border: 2px solid #0d0f14;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(12px, 2.4vw, 14px);
+}
+
+.gg-overlay-btn-primary {
+  border-color: #8467c9;
+  background: #313a49;
+}
+
+.gg-new-best {
+  color: #d8b34a;
+  font-size: 0.85em;
+}
+
+.gg-gameover-grid {
+  display: grid;
+  gap: 6px;
+  font-size: clamp(12px, 2.4vw, 14px);
+}
+
+.gg-gameover-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.gg-gameover-variants,
+.gg-gameover-pb {
+  margin-top: 10px;
+  font-size: clamp(11px, 2.2vw, 12px);
+  color: #c9aef5;
+}
+
+.gg-layout-compact .gg-hud-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.gg-layout-compact .gg-hud-topcenter {
+  grid-column: 1 / -1;
+}
+
+.gg-layout-compact .gg-hud-grid,
+.gg-layout-portrait .gg-hud-grid {
+  transform: scale(0.9);
+  transform-origin: top center;
+}
+
+.gg-layout-portrait .gg-hud-grid {
+  grid-template-columns: 1fr;
+}
+
+.gg-layout-portrait .gg-hud-topleft,
+.gg-layout-portrait .gg-hud-topcenter,
+.gg-layout-portrait .gg-hud-topright {
+  justify-self: stretch;
+  text-align: left;
+  align-items: stretch;
+}
+
+.gg-layout-portrait .gg-hud-weapon {
+  bottom: 96px;
+}
+
+.gg-layout-portrait .gg-upgrade-cards {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.gg-layout-portrait .gg-upgrade-card {
+  width: 100%;
+  max-width: none;
+}
+
+.gg-upgrade-dialog {
+  background: #121722;
+  border: 2px solid #8467c9;
+  padding: 12px;
+  max-width: 96vw;
+}
+
+.gg-upgrade-queue {
+  text-align: center;
+  color: #c9aef5;
+  font-size: 11px;
+  min-height: 14px;
+  margin-bottom: 8px;
+}
+
+.gg-upgrade-cards {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gg-upgrade-card {
+  width: 160px;
+  min-height: 200px;
+  background: #1e2635;
+  border: 2px solid #0d0f14;
+  color: #e6edf5;
+  text-align: left;
+  padding: 8px;
+  cursor: pointer;
+  font: inherit;
+  min-width: 96px;
+  min-height: 96px;
+}
+
+.gg-upgrade-card:focus {
+  outline: 2px solid #d8b34a;
+}
+
+.gg-upgrade-hotkey {
+  display: inline-block;
+  background: #313a49;
+  padding: 2px 6px;
+  margin-bottom: 4px;
+}
+
+.gg-upgrade-title {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.gg-upgrade-meta {
+  font-size: 10px;
+  color: #c9aef5;
+}
+
+.gg-upgrade-desc {
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.gg-upgrade-pips {
+  color: #d8b34a;
+  letter-spacing: 2px;
+}
+
+.gg-settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(13 15 20 / 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  pointer-events: auto;
+}
+
+.gg-settings-dialog {
+  background: #121722;
+  border: 2px solid #313a49;
+  padding: 12px;
+  max-height: 90vh;
+  overflow: auto;
+  width: min(420px, 96vw);
+  color: #e6edf5;
+  font-size: 12px;
+}
+
+.gg-settings-row {
+  display: block;
+  margin: 8px 0;
+}
